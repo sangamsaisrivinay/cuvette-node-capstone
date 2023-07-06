@@ -20,6 +20,13 @@ app.get('/', (req, res)=>{
     res.send('home');
 })
 
+app.get('/health', (req, res)=>{
+    res.send({'health':'server is up'});
+}
+)
+
 app.listen(PORT,()=>{
-    console.log('server listening on http://localhost:'+PORT)
+    mongoose.connect(DB_URL)
+    .then(console.log('connected to db\nserver listening on http://localhost:'+PORT))
+    .catch((err)=>console.log(err))
 })
